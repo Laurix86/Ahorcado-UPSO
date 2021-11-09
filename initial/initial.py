@@ -2,6 +2,7 @@ from tkinter import *
 
 mainWindow = Tk()
 mainWindow.title("Ahorcado")
+mainWindow.iconbitmap("../images/514163.ico")
 
 nameLabel = Label(mainWindow, text="Ingresar el nombre del jugador")
 nameInput = Entry(mainWindow, width=50)
