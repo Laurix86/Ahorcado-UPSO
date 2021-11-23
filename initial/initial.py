@@ -1,8 +1,14 @@
 from tkinter import *
+from diccionario import *
 
 mainWindow = Tk()
 mainWindow.title("Ahorcado")
 mainWindow.iconbitmap("../images/514163.ico")
+
+csvFilePath = "../Diccionario.csv"
+jsonFilePath = "../diccionario.json"
+
+make_json(csvFilePath, jsonFilePath)
 
 nameLabel = Label(mainWindow, text="Ingresar el nombre del jugador")
 nameInput = Entry(mainWindow, width=50)
