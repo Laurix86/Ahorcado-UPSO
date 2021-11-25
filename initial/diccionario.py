@@ -16,7 +16,7 @@ def make_json(csvFilePath, jsonFilePath):
         # Convert each row into a dictionary
         # and add it to data
         for rows in csvReader:
-            print(rows)
+            # print(rows)
             # Assuming a column named 'No' to
             # be the primary key
             key = rows["id"]
@@ -26,8 +26,7 @@ def make_json(csvFilePath, jsonFilePath):
     # Open a json writer, and use the json.dumps()
     # function to dump data
     with open(jsonFilePath, "w", encoding="UTF-8") as jsonf:
-        jsonf.write(json.dumps(data, indent=4))
-    print(data[20])
+        jsonf.write(json.dumps(data, indent=4, ensure_ascii=False))
 
 
 # Driver Code
