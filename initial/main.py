@@ -3,11 +3,13 @@ from tkinter import *
 from diccionario import *
 import random
 import initialWindow
+import imprimirDibujo
+
 
 # Creación Diccionario en archivo JSON
 csvFilePath = "../Diccionario.csv"
 jsonFilePath = "../diccionario.json"
-make_json(csvFilePath, jsonFilePath)
+# make_json(csvFilePath, jsonFilePath)
 
 # Selección palabra para jugar
 
@@ -18,26 +20,25 @@ with open(jsonFilePath, "r", encoding="UTF-8") as diccionario:
     # print("palabra: ", selectedWord)
 
 mainWindow = Tk()
+mainWindow.geometry("1400x600")
 mainWindow.title("Ahorcado")
 mainWindow.iconbitmap("../images/514163.ico")
 
-nameLabel = Label(mainWindow, text="Ingresar el nombre del jugador")
-nameInput = Entry(mainWindow, width=50)
-playButton = Button(
-    mainWindow, text="Comenzar Juego", command=lambda: play(nameInput.get())
-)
+frameMenu = Frame(mainWindow)
+frameMunieco = Frame(mainWindow)
+
+# menuBar = Menu(mainWindow)
+# opcionesMenu= Menu(menuBar, tearoff=0)
+# opcionesMenu.add
 
 
-def play(player):
-    return
+initialWindow.menuInicial(frameMenu)
+imprimirDibujo.imprimirparte(5, frameMunieco)
+# frameMenu.pack()
+frameMenu.grid(row=0, column=0, columnspan=5)
+frameMunieco.grid(row=0, column=5, columnspan=5)
 
-
-initialWindow.menuInicial(mainWindow)
-# primerMenu.grid(row=0, column=0, columnspan=3)
-# nameLabel.grid(row=1, column=0, columnspan=3)
-# nameInput.grid(row=2, column=0, columnspan=3)
-# playButton.grid(row=3, column=0, columnspan=6)
-playButton.pack()
+# playButton.pack()
 
 
 mainWindow.mainloop()

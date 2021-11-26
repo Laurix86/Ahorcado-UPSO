@@ -1,9 +1,13 @@
 # errores = 1
+from tkinter import *
 
 
-def imprimirparte(errores):
+def imprimirparte(errores, window):
     # uso dibujo para agregar lo que voy a dibujar. luego lo voy a recorrer y voy a ir dibujando
     dibujo = []
+    pedacitos = ""
+    tituloLabel = Label(window, text="Bienvenidos\nal juego\ndel Ahorcado")
+    tituloLabel.grid(row=0, column=2, columnspan=6)
     # c
     Cabeza = [114, 115, 116, 134, 138, 155, 159, 176, 180, 198, 199, 200]
     Tronco = [220, 241, 262, 283, 304, 325, 346]
@@ -53,29 +57,37 @@ def imprimirparte(errores):
     contadorsaltos = 0
 
     for i in range(0, 545):
+        dibuLabel = Label(window, text=pedacitos)
         if i <= 10 or i > 525:
-            print("-", end="")
+            pedacitos = pedacitos + "-"
+            # pedacitos = "primero"
+            # print("-", end="")
         else:
             if i in vertical:
                 contadorsaltos += 1
-                print(f"", end="\n")
-                print("|", end="")
+                pedacitos = pedacitos + "" + "\n"
+                pedacitos = pedacitos + "|" + ""
+                # pedacitos = "segundo"
                 contadorsaltos += 1
             else:
                 imprimirblanco = True
                 # busco i en dibujo
                 for e in range(errores):
                     if i in dibujo[e]:
-                        print("*", end="")
+                        pedacitos = pedacitos + "*" + ""
+                        # pedacitos = "tercero"
                         imprimirblanco = False
                 if imprimirblanco:
-                    print(" ", end="")
+                    # pedacitos = "cuarto"
+                    pedacitos = pedacitos + " " + ""
+    dibuLabel.grid(row=0, column=6)
 
 
+""" 
 print(f"La palabra es:")
 print(f" _ _ _ _ _ _")
 print()
 print(f"usted a cometido", errores, "errores")
 imprimirparte()
 print()
-print(f"por favor ingrese una letra nueva:")
+print(f"por favor ingrese una letra nueva:") """
