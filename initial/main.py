@@ -11,7 +11,7 @@ csvFilePath = "../Diccionario.csv"
 jsonFilePath = "../diccionario.json"
 # make_json(csvFilePath, jsonFilePath)
 
-# Selección palabra para jugar
+# Selección palabra para jugar \
 
 numberWord = str(random.randint(0, 5000))
 with open(jsonFilePath, "r", encoding="UTF-8") as diccionario:

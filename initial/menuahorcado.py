@@ -13,6 +13,7 @@ menu = {
     "02": {"1": "Seguir Jugando", "9": "Menu Anterior"},
     "03": {"1": "Buscar Archivo", "9": "Menu Anterior"},
     "04": {"1": "Reset Posiciones", "9": "Menu Anterior"},
+    "011": {"1": "Jugar", "9": "Menu Anterior"},
 }
 # menuprincipal = {'1':'Nuevo Juego', '2':'Ultima Partida','3':'Agregar Palabras','4':'Ver tabla posiciones','9':'Salir'}
 # menu1 = {'1':'1 vs CPU', '2':'2 vs CPU','3':'1 vs 1','9':'Menu Anterior'}
@@ -26,11 +27,11 @@ opcion = "0"
 
 
 def mostrarmenu():
-    # clearConsole()
-    print(f"Menu:\n", opcionmenu)
+    clearConsole()
+    print(f"Menu:", opcionmenu, "\n")
     for op in menuactivo:
-        print(f"", op, "-", menuactivo[op], "\n")
-    # print(menuactivo)
+        print(f"", op, "-", menuactivo[op], "       ")
+    print(f"---------------------------------\n")
 
 
 # ------------------------------------------ fin mostrar menu
@@ -73,35 +74,42 @@ def cambiardemenu(opcion):
     global menu
     global menuactivo
     global opcionmenu
+    estado = ""
     profundidadmenu = len(opcionmenu)
-    print(f"profundidad", profundidadmenu, "opcion", opcionmenu)
     # lo uso para determinar donde estoy del menu siendo 0 el primer nivel,
-    if opcion == "9":
-        # si opcion es 9 entonces debo salir o volver
-        if profundidadmenu > 1:
-            # entonces tengo q volver al menu anterior
-            opcionmenu = opcionmenu[0 : profundidadmenu - 1]
-            menuactivo = menu[opcionmenu]
-        else:
-            opcionmenu = False
-            print(f"Saliendo\nGracias x jugar. Nos vemos Pronto.")
-    elif opcion in menuactivo:
-        if opcion != "9":
-            opcionmenu = opcionmenu + opcion
-            menuactivo = menu[opcionmenu]
-            print(f"Nueva opcion:", opcionmenu)
-            # *****************
-        else:
-            print(f"invalida:", opcion)
+
+    # controlo si estoy en un nivel de definicion de accion y la opcion elegida es accion, entonces cambio el estado,
+    # sino navego el menu.
+    if profundidadmenu == 3 and opcion != "9":
+        estado = menuactivo[opcion]
+        print(f"estado actual", estado)
     else:
-        print(f"Opcion invalida:", opcion)
+        # navegando el menu
+        if opcion == "9":
+            # si opcion es 9 entonces debo salir o volver
+            if profundidadmenu > 1:
+                # entonces tengo q volver al menu anterior
+                opcionmenu = opcionmenu[0 : profundidadmenu - 1]
+                menuactivo = menu[opcionmenu]
+
+            else:
+                opcionmenu = "Salir"
+        elif profundidadmenu < 4 and opcion in menuactivo:
+            print(f"la opcion:", opcion, "opcionmenu", opcionmenu)
+            if opcion != "9":
+                opcionmenu = opcionmenu + opcion
+                menuactivo = menu[opcionmenu]
+                print(f"Nueva opcion:", opcionmenu)
+                # *****************
+            else:
+                print(f"invalida:", opcion)
+        else:
+            print(f"Opcion invalida:", opcion)
+
+    return estado
 
 
 # ------------------------------------------ fin cambiardemenu
-
-
-while opcionmenu != False:
-    mostrarmenu()
-    opcion = leeropcion()
-    cambiardemenu(opcion)
-print(f"esta linea es de control luego se borrara\nopcion es ", opcionmenu)
+def cerrar():
+    # clearConsole()
+    print(f"Saliendo\nGracias x jugar. Nos vemos Pronto.")
